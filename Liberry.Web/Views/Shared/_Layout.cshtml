@@ -6,6 +6,9 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript">
+        var _baseURL = "@Url.Content("~")";
+    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -28,6 +31,7 @@
         </div>
     </div>
     <div class="container body-content">
+        @Html.Partial("PasswordPromptPartial")
         @RenderBody()
         <hr />
         <footer>
@@ -37,6 +41,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/shared")
     @RenderSection("scripts", required: false)
 </body>
 </html>

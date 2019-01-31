@@ -9,7 +9,8 @@ namespace Liberry.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.cookie-1.4.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -25,6 +26,14 @@ namespace Liberry.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/shared").Include(
+                        "~/Scripts/Shared/MVCUtils.js",
+                        "~/Scripts/Shared/Ajax.js",
+                        "~/Scripts/Shared/TokenManager.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/home/index").Include(
+                        "~/Scripts/Home/Index.js"));
         }
     }
 }

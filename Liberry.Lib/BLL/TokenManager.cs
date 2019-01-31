@@ -55,6 +55,10 @@ namespace Liberry.Lib.BLL
             
             using (var context = new LiberryContext())
             {
+                // Remove old tokens assigned to this IP Address
+                var existingTokens = context.Tokens.Where(obj => obj.IpAddress == ipAddress);
+                context.Tokens.RemoveRange(existingTokens);
+
                 var nextId = 0;
                 if (context.Tokens.Any())
                 {
@@ -68,6 +72,7 @@ namespace Liberry.Lib.BLL
                     IpAddress = ipAddress,
                     Expires = DateTime.Now.AddMinutes(5) // TODO: Change to a higher number. Or better, make it configurable.
                 });
+                context.SaveChanges();
             }
 
             return tokenValue;
