@@ -15,7 +15,7 @@ namespace Liberry.Web.Controllers
                 Success = true,
                 Data = data,
                 Message = ""
-            });
+            }, JsonRequestBehavior.AllowGet);
         }
 
         protected JsonResult AjaxFail(string message)
@@ -25,7 +25,7 @@ namespace Liberry.Web.Controllers
                 Success = false,
                 Data = null,
                 Message = message
-            });
+            }, JsonRequestBehavior.AllowGet);
         }
 
         private class ResponseObject

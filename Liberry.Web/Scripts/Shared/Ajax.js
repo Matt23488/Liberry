@@ -24,7 +24,13 @@
             url: this.url,
             cache: false,
             data: data,
-            success: function (response) {
+            success: function (responseRaw) {
+                var response;
+                try {
+                    response = JSON.parse(responseRaw);
+                }
+                catch (error) { response = responseRaw; }
+
                 if (response.Success === true) {
                     if (successCallback) {
                         successCallback(response.Data);
