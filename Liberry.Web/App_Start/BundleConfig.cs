@@ -29,8 +29,7 @@ namespace Liberry.Web
 
             bundles.Add(new ScriptBundle("~/bundles/shared").Include(
                         "~/Scripts/Shared/MVCUtils.js",
-                        "~/Scripts/Shared/Ajax.js",
-                        "~/Scripts/Shared/TokenManager.js"));
+                        "~/Scripts/Shared/Ajax.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/home/index").Include(
                         "~/Scripts/Home/Index.js"));

@@ -12,16 +12,24 @@ namespace Liberry.Web.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (!filterContext.ActionParameters.ContainsKey("token")) throw new InvalidOperationException("You are not authorized to do this. A valid token value must be supplied to access this functionality.");
-
-            var tokenValue = filterContext.ActionParameters["token"] as string;
-            if (string.IsNullOrWhiteSpace(tokenValue)) throw new InvalidOperationException("You are not authorized to do this. A valid token value must be supplied to access this functionality.");
+            var cookie = filterContext.HttpContext.Request.Cookies.Get("token");
+            if (cookie == null)
+            {
+                RedirectToLogin(filterContext);
+                return;
+            }
 
             var tokenManager = new TokenManager();
-            // Maybe just store the token as a cookie and access it through the cookies, rather than needing special parameters
-            //if (!tokenManager.ValidateToken(tokenValue, filterContext.HttpContext.Request.Cookies))
-            //filterContext.HttpContext.Request.UserHostAddress // This is the IP
-            if (!tokenManager.ValidateToken(tokenValue, filterContext.HttpContext.Request.UserHostAddress)) throw new InvalidOperationException("You are not authorized to do this. The token value supplied is not valid.");
+            if (!tokenManager.ValidateToken(cookie.Value, filterContext.HttpContext.Request.UserHostAddress))
+            {
+                RedirectToLogin(filterContext);
+            }
+        }
+
+        private void RedirectToLogin(ActionExecutingContext filterContext)
+        {
+            var encodedURL = filterContext.HttpContext.Server.UrlEncode(filterContext.HttpContext.Request.RawUrl);
+            filterContext.HttpContext.Response.Redirect($"/Auth/Login?redirectURL={encodedURL}", true);
         }
     }
 }

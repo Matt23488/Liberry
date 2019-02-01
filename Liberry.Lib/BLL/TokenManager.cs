@@ -23,8 +23,10 @@ namespace Liberry.Lib.BLL
             }
             else
             {
+                var token = GenerateToken(ipAddress);
                 response.Valid = true;
-                response.Token = GenerateToken(ipAddress);
+                response.Token = token.TokenValue;
+                response.Expires = token.Expires;
             }
 
             return response;
@@ -40,7 +42,7 @@ namespace Liberry.Lib.BLL
             }
         }
 
-        private string GenerateToken(string ipAddress)
+        private Token GenerateToken(string ipAddress)
         {
             const int numGuids = 2;
             var guidLength = Guid.Empty.ToByteArray().Length;
@@ -52,6 +54,7 @@ namespace Liberry.Lib.BLL
             }
 
             var tokenValue = Convert.ToBase64String(bytes);
+            var token = default(Token);
             
             using (var context = new LiberryContext())
             {
@@ -65,17 +68,19 @@ namespace Liberry.Lib.BLL
                     nextId = context.Tokens.Max(obj => obj.TokenId) + 1;
                 }
 
-                context.Tokens.Add(new Token
+                token = new Token
                 {
                     TokenId = nextId,
                     TokenValue = tokenValue,
                     IpAddress = ipAddress,
                     Expires = DateTime.Now.AddMinutes(5) // TODO: Change to a higher number. Or better, make it configurable.
-                });
+                };
+
+                context.Tokens.Add(token);
                 context.SaveChanges();
             }
 
-            return tokenValue;
+            return token;
         }
     }
 }

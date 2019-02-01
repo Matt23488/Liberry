@@ -10,5 +10,6 @@ namespace Liberry.Lib.DTO
     {
         public bool Valid { get; set; }
         public string Token { get; set; }
+        public DateTime Expires { get; set; }
     }
 }
