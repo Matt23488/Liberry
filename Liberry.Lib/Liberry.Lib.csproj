@@ -53,6 +53,7 @@
     <Compile Include="DAL\LiberryContext.cs" />
     <Compile Include="DAL\Token.cs" />
     <Compile Include="DTO\TokenResponse.cs" />
+    <Compile Include="DTO\TokenTempDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

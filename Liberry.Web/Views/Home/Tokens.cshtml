@@ -1,0 +1,42 @@
+﻿@model List<TokenTempDTO>
+
+@{
+    ViewBag.Title = "Tokens";
+}
+
+<h2>Tokens</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model[0].TokenId)</th>
+            <th>@Html.DisplayNameFor(model => model[0].TokenValue)</th>
+            <th>@Html.DisplayNameFor(model => model[0].IpAddress)</th>
+            <th>@Html.DisplayNameFor(model => model[0].Expires)</th>
+            <th>@Html.DisplayNameFor(model => model[0].Expired)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => model[i].TokenId)</td>
+                    <td>@Html.DisplayFor(model => model[i].TokenValue)</td>
+                    <td>@Html.DisplayFor(model => model[i].IpAddress)</td>
+                    <td>@Html.DisplayFor(model => model[i].Expires)</td>
+                    <td>@Html.YesNoFor(model => model[i].Expired)</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" class="text-center">
+                    <em>No tokens to show.</em>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

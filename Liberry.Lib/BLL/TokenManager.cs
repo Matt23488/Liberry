@@ -12,6 +12,7 @@ namespace Liberry.Lib.BLL
     public class TokenManager
     {
         private static readonly string _password = ConfigurationManager.AppSettings["password"];
+        private static readonly int _tokenLife = int.Parse(ConfigurationManager.AppSettings["tokenLife"]);
 
         public TokenResponse GetToken(string password, string ipAddress)
         {
@@ -42,6 +43,24 @@ namespace Liberry.Lib.BLL
             }
         }
 
+        // TODO: Remove this
+        public List<TokenTempDTO> GetAllTokens()
+        {
+            using (var context = new LiberryContext())
+            {
+                var dtos = from token in context.Tokens
+                           select new TokenTempDTO
+                           {
+                               TokenId = token.TokenId,
+                               TokenValue = token.TokenValue,
+                               IpAddress = token.IpAddress,
+                               Expires = token.Expires
+                           };
+
+                return dtos.ToList();
+            }
+        }
+
         private Token GenerateToken(string ipAddress)
         {
             const int numGuids = 2;
@@ -62,18 +81,11 @@ namespace Liberry.Lib.BLL
                 var existingTokens = context.Tokens.Where(obj => obj.IpAddress == ipAddress);
                 context.Tokens.RemoveRange(existingTokens);
 
-                var nextId = 0;
-                if (context.Tokens.Any())
-                {
-                    nextId = context.Tokens.Max(obj => obj.TokenId) + 1;
-                }
-
                 token = new Token
                 {
-                    TokenId = nextId,
                     TokenValue = tokenValue,
                     IpAddress = ipAddress,
-                    Expires = DateTime.Now.AddMinutes(5) // TODO: Change to a higher number. Or better, make it configurable.
+                    Expires = DateTime.Now.AddMinutes(_tokenLife)
                 };
 
                 context.Tokens.Add(token);

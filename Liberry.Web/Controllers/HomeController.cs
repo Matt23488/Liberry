@@ -1,4 +1,5 @@
-﻿using Liberry.Web.Filters;
+﻿using Liberry.Lib.BLL;
+using Liberry.Web.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,13 @@ namespace Liberry.Web.Controllers
     //[ValidateToken]
     public class HomeController : ControllerBase
     {
+        private TokenManager _tokenManager;
+
+        public HomeController()
+        {
+            _tokenManager = new TokenManager();
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -23,11 +31,11 @@ namespace Liberry.Web.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Tokens()
         {
-            ViewBag.Message = "Your contact page.";
+            var model = _tokenManager.GetAllTokens();
 
-            return View();
+            return View(model);
         }
 
         [AjaxOnly]

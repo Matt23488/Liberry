@@ -5,12 +5,13 @@
 }
 
 <h2>Login</h2>
-
-@Html.ValidationSummary()
+<p class="text-info">You must enter the password to continue.</p>
 
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.RedirectURL)
+    @Html.BSValidationMessageFor(model => model.Password)
     @Html.BSPasswordFor(model => model.Password)
+    <br />
     <button type="submit" class="btn btn-primary">Submit</button>
 }
