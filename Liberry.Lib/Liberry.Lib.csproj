@@ -50,7 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\TokenManager.cs" />
+    <Compile Include="DAL\Book.cs" />
     <Compile Include="DAL\LiberryContext.cs" />
+    <Compile Include="DAL\Section.cs" />
     <Compile Include="DAL\Token.cs" />
     <Compile Include="DTO\TokenResponse.cs" />
     <Compile Include="DTO\TokenTempDTO.cs" />
