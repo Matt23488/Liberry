@@ -10,5 +10,7 @@ namespace Liberry.Lib.DAL
     class LiberryContext : DbContext
     {
         public DbSet<Token> Tokens { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Section> Sections { get; set; }
     }
 }

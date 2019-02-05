@@ -54,14 +54,31 @@
     <Compile Include="DAL\LiberryContext.cs" />
     <Compile Include="DAL\Section.cs" />
     <Compile Include="DAL\Token.cs" />
+    <Compile Include="DTO\BookDTO.cs" />
     <Compile Include="DTO\TokenResponse.cs" />
     <Compile Include="DTO\TokenTempDTO.cs" />
+    <Compile Include="Migrations\201901311827497_InitialCreate.cs" />
+    <Compile Include="Migrations\201901311827497_InitialCreate.Designer.cs">
+      <DependentUpon>201901311827497_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902051420140_BookStuff.cs" />
+    <Compile Include="Migrations\201902051420140_BookStuff.Designer.cs">
+      <DependentUpon>201902051420140_BookStuff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201901311827497_InitialCreate.resx">
+      <DependentUpon>201901311827497_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902051420140_BookStuff.resx">
+      <DependentUpon>201902051420140_BookStuff.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

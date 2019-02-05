@@ -179,6 +179,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Shared\Ajax.js" />
     <Content Include="Scripts\Shared\MVCUtils.js" />
+    <Content Include="Scripts\Shared\SearchResultsTable.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -194,10 +195,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Home\Tokens.cshtml" />
+    <Content Include="Views\Books\Search.cshtml" />
+    <Content Include="Views\Books\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Books\" />
     <Folder Include="Views\ControllerBase\" />
   </ItemGroup>
   <ItemGroup>

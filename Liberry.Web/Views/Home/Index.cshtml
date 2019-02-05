@@ -14,21 +14,27 @@
 <div class="row">
     <div class="col-md-4">
         <h2>Book Search</h2>
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" />
-            <div class="input-group-btn">
-                <button id="bookSearchButton" class="btn btn-primary" type="button"><i class="glyphicon glyphicon-search"></i></button>
+        @using (Html.BeginForm("Search", "Books", FormMethod.Get))
+        {
+            <div class="input-group">
+                <input type="text" name="searchText" class="form-control" placeholder="Search" />
+                <div class="input-group-btn">
+                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
             </div>
-        </div>
+        }
     </div>
     <div class="col-md-4">
         <h2>Author Search</h2>
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" />
-            <div class="input-group-btn">
-                <button id="authorSearchButton" class="btn btn-primary" type="button"><i class="glyphicon glyphicon-search"></i></button>
+        @using (Html.BeginForm("Search", "Author", FormMethod.Get))
+        {
+            <div class="input-group">
+                <input type="text" name="searchText" class="form-control" placeholder="Search" />
+                <div class="input-group-btn">
+                    <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
             </div>
-        </div>
+        }
     </div>
     <div class="col-md-4">
         <h2>Add Books</h2>

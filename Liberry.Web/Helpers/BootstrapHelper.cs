@@ -15,7 +15,6 @@ namespace Liberry.Web.Helpers
         public static IHtmlString BSPasswordFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, string>> expression)
         {
             var metadata = ModelMetadata.FromLambdaExpression(expression, html.ViewData);
-            var password = metadata.Model as string;
 
             var formGroup = HtmlTags.Div.Class("input-group");
             
@@ -33,5 +32,20 @@ namespace Liberry.Web.Helpers
 
         public static IHtmlString BSValidationMessageFor<TModel, TProp>(this HtmlHelper<TModel> html, Expression<Func<TModel, TProp>> expression)
             => HtmlTag.Parse(html.ValidationMessageFor(expression)).Class("text-danger").ToHtml(TagRenderMode.Normal);
+
+        public static IHtmlString BSTextBoxFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, string>> expression)
+        {
+            var formGroup = HtmlTags.Div.Class("form-group").Append(
+                                HtmlTags.Label.Class("col-sm-2").Class("control-label").Append(html.DisplayNameFor(expression).ToHtmlString())).Append(
+                                HtmlTags.Div.Class("col-sm-10").Append(
+                                    HtmlTag.Parse(html.TextBoxFor(expression).ToHtmlString()).Class("form-control")
+                                )
+                            );
+
+            return formGroup.ToHtml();
+        }
+
+        public static MvcForm BSBeginHorizontalForm(this HtmlHelper html, string action = null, string controller = null, FormMethod method = FormMethod.Post)
+            => html.BeginForm(action, controller, method, new { @class = "form-horizontal" });
     }
 }
