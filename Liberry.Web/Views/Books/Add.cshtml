@@ -7,19 +7,10 @@
 <h2>Add Book</h2>
 @using (Html.BSBeginHorizontalForm())
 {
-    @*<div class="input-group">
-        <span class="input-group-addon">@Html.DisplayNameFor(model => model.Title)</span>
-        <input id="@Html.IdFor(model => model.Title)" name="Title" type="text" class="form-control" />
-    </div>
-    <div class="input-group">
-        <span class="input-group-addon">@Html.DisplayNameFor(model => model.AuthorLast)</span>
-        <input id="Title" name="Title" type="text" class="form-control" />
-    </div>
-    <div class="input-group">
-        <span class="input-group-addon">@Html.DisplayNameFor(model => model.AuthorFirst)</span>
-        <input id="Title" name="Title" type="text" class="form-control" />
-    </div>*@
     @Html.BSTextBoxFor(model => model.Title)
     @Html.BSTextBoxFor(model => model.AuthorLast)
     @Html.BSTextBoxFor(model => model.AuthorFirst)
+    @Html.BSSelectListFor(model => model.SectionId, ViewBag.Sections as SelectList, true)
+    <button type="button" class="btn btn-success">Add Section</button>
+    @*@Html.BSTextBoxFor(model => model.Title)*@
 }

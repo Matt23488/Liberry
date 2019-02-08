@@ -47,5 +47,28 @@ namespace Liberry.Web.Helpers
 
         public static MvcForm BSBeginHorizontalForm(this HtmlHelper html, string action = null, string controller = null, FormMethod method = FormMethod.Post)
             => html.BeginForm(action, controller, method, new { @class = "form-horizontal" });
+
+        public static IHtmlString BSSelectListFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, int>> expression, SelectList selectList, bool addButton = false)
+        {
+            var formGroup = HtmlTags.Div.Class("form-group");/*.Append(
+                                HtmlTag.Parse(html.LabelFor(expression)).Class("col-sm-2").Class("control-label")).Append(
+                                HtmlTags.Div.Class("col-sm-10").Append(
+                                    HtmlTag.Parse(html.DropDownListFor(expression, selectList)).Class("form-control")
+                                )
+                            );*/
+
+            var label = HtmlTag.Parse(html.LabelFor(expression)).Class("col-sm-2").Class("control-label");
+            var dropDown = HtmlTags.Div.Class("col-sm-10");//.Append(HtmlTag.Parse(html.DropDownListFor(expression, selectList)).Class("form-control"));
+
+            if (addButton)
+            {
+                dropDown.Append(HtmlTags.Button.Class("btn").Class("btn-success").Append(HtmlTags.I.Class("glyphicon").Class("glyphicon-plus")));
+            }
+            dropDown.Append(HtmlTag.Parse(html.DropDownListFor(expression, selectList)).Class("form-control"));
+
+            formGroup.Append(label).Append(dropDown);
+
+            return formGroup.ToHtml();
+        }
     }
 }
